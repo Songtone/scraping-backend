@@ -31,7 +31,7 @@ mongoose.connect(process.env.MONGO_URL, {
 }).then(() => {
     app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
     // RUN ONCE FOR DATA TESTING
-    //MtgCard.insertMany(mtgCards)
+    // MtgCard.insertMany(mtgCards)
 
 }).catch((error) => console.log(`${error} did not connect`));
 

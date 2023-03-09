@@ -13,9 +13,13 @@ const MtgCardSchema = new mongoose.Schema(
             required: true
         },
         mtgCardPicturePath: {
-            type:String,
+            type: String,
             default: "",
         },
+        mtgCardUrl: {
+            type: String,
+            default: ""
+        }
     },
     { timestamps: true }
 )
