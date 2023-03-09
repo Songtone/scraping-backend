@@ -2,7 +2,6 @@ import MtgCard from "../models/MtgCard.js";
 import axios from "axios";
 import {load} from "cheerio";
 
-
 // READ
 export const getMtgCards = async (req, res) => {
     try {
@@ -10,7 +9,10 @@ export const getMtgCards = async (req, res) => {
         let mtgCard = new MtgCard();
         const refreshedCards = await Promise.all(mtgCards.map(async (card) => {
             try {
-                return mtgCard = await scrapingCard(card.mtgCardUrl, false);
+                mtgCard = await scrapingCard(card.mtgCardUrl, false);
+
+                card.mtgCardPrice = mtgCard.mtgCardPrice;
+                return card;
             } catch (error) {
                 console.log(error);
             }
@@ -20,6 +22,17 @@ export const getMtgCards = async (req, res) => {
         res.status(404).json({message: error.message});
     }
 };
+
+// DELETE
+export const deleteMtgCard = async(req, res) => {
+    const { id } = req.params;
+    try{
+        await MtgCard.deleteOne({_id: id});
+        res.status(200).json({msg: "Card deleted"})
+    }catch (error){
+        res.status(409).json({message: error.message});
+    }
+}
 
 // SAVE
 export const saveMtgCard = async (req, res) => {

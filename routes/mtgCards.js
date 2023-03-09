@@ -1,5 +1,5 @@
 import express from "express";
-import {getMtgCards, saveMtgCard} from "../controllers/mtgCards.js";
+import {deleteMtgCard, getMtgCards, saveMtgCard} from "../controllers/mtgCards.js";
 
 const router = express.Router();
 
@@ -8,5 +8,8 @@ router.get("/", getMtgCards)
 
 // CREATE
 router.post("/save", saveMtgCard)
+
+// DELETE
+router.delete("/delete/:id", deleteMtgCard)
 
 export default router;
