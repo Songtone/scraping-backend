@@ -33,7 +33,7 @@ async function scheduledCardPriceCheck() {
     }
 }
 // READ
-export const getMtgCards = async (res) => {
+export const getMtgCards = async (req, res) => {
     try {
         const mtgCards = await MtgCard.find();
         res.status(200).json(mtgCards);
