@@ -7,17 +7,17 @@ export const getMtgCards = async (req, res) => {
     try {
         const mtgCards = await MtgCard.find();
         let mtgCard = new MtgCard();
-        const refreshedCards = await Promise.all(mtgCards.map(async (card) => {
-            try {
-                mtgCard = await scrapingCard(card.mtgCardUrl, false);
-
-                card.mtgCardPrice = mtgCard.mtgCardPrice;
-                return card;
-            } catch (error) {
-                console.log(error);
-            }
-        }))
-        res.status(200).json(refreshedCards);
+        // const refreshedCards = await Promise.all(mtgCards.map(async (card) => {
+        //     try {
+        //         mtgCard = await scrapingCard(card.mtgCardUrl, false);
+        //
+        //         card.mtgCardPrice = mtgCard.mtgCardPrice;
+        //         return card;
+        //     } catch (error) {
+        //         console.log(error);
+        //     }
+        // }))
+        res.status(200).json(mtgCards);
     } catch (error) {
         res.status(404).json({message: error.message});
     }
