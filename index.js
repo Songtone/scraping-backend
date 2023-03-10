@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import helmet from "helmet";
 import morgan from 'morgan';
 import mtgRoutes from "./routes/mtgCards.js";
+
 import { mtgCards } from "./data/index.js";
 import MtgCard from "./models/MtgCard.js";
 
