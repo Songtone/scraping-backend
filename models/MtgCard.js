@@ -18,7 +18,12 @@ const MtgCardSchema = new mongoose.Schema(
         },
         mtgCardUrl: {
             type: String,
-            default: ""
+            default: "",
+            required: true
+        },
+        percentChangeInValue: {
+            type: String,
+            default: "0%"
         }
     },
     { timestamps: true }

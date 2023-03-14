@@ -2,6 +2,7 @@ import MtgCard from "../models/MtgCard.js";
 import axios from "axios";
 import {load} from "cheerio";
 import schedule from "node-schedule";
+import {SCRYFALL_API_URL} from "../constants.js";
 
 
 schedule.scheduleJob('*/30 * * * *', function () {
@@ -42,6 +43,26 @@ export const getMtgCards = async (req, res) => {
     }
 };
 
+export const getDropdownResult = async (req, res) => {
+    const {autoCompleteTerm} = req.params;
+    try {
+        const {data} = await axios.get(`${SCRYFALL_API_URL}autocomplete?q=` + autoCompleteTerm);
+        res.status(200).json(data.data);
+    }catch (error){
+        res.status(404).json({message: error.message});
+    }
+}
+
+export const getSearchCard = async (req, res) => {
+    const {searchTerm} = req.params;
+    try {
+        const {data} = await axios.get(`${SCRYFALL_API_URL}search?q=` + searchTerm);
+        res.status(200).json(data.data);
+    }catch (error){
+        res.status(404).json({message: error.message});
+    }
+}
+
 // DELETE
 export const deleteMtgCard = async (req, res) => {
     const {id} = req.params;
@@ -53,7 +74,7 @@ export const deleteMtgCard = async (req, res) => {
     }
 }
 
-// SAVE
+// POST
 export const saveMtgCard = async (req, res) => {
     const {url} = req.body;
     try {

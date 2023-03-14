@@ -1,0 +1,1 @@
+export const SCRYFALL_API_URL = "https://api.scryfall.com/cards/";
